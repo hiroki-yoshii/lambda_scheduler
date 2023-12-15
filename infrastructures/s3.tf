@@ -1,3 +1,4 @@
-resource "aws_s3_bucket" "test-bucket" {
-  bucket = "my-bucket"
+# S3バケット
+resource "aws_s3_bucket" "original_data_bucket" {
+  bucket = "original-data"
 }

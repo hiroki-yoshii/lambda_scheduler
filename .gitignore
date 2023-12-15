@@ -1,13 +1,14 @@
-# Terraform state files
+# Terraformの状態を管理するファイルはGitで管理しない
 infrastructures/*.tfstate
 infrastructures/*.tfstate.*
+# Terraformバイナリ
 infrastructures/.terraform/
 
-# Lambda function ZIP files
+# プロジェクトビルド時に作成されるファイル
 src/*.zip
-
-# LocalStack data
+src/package
+# LocalStackデータ
 data/
 
-# Miscellaneous
+# Mac用
 .DS_Store
