@@ -1,0 +1,37 @@
+# ./docker-compose.yaml
+
+version: '3.8'
+services:
+  localstack:
+    container_name: "localstack"
+    image: localstack/localstack:3
+    ports:
+      - "4566:4566"
+    environment:
+      - SERVICES=lambda,s3,iam
+      - DEBUG=1
+      - LAMBDA_EXECUTOR=docker
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - "/localstack/data:/var/lib/localstack"  # ホストのdataディレクトリからコンテナ内にマウント
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    networks:
+      - local-net
+
+  terraform:
+    container_name: "terraform"
+    build:
+      context: ./docker/terraform
+    volumes:
+      - ./infrastructures:/app
+      - ./src:/src
+    entrypoint: /bin/sh -c "zip -j /src/lambda_function.zip /src/lambda_function.py && 
+      terraform init &&
+      terraform plan &&
+      terraform apply -auto-approve"
+    networks:
+      - local-net
+# コンテナ間で通信を行うためのネットワークブリッジ
+networks:
+  local-net:
+    driver: bridge

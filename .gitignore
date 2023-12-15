@@ -1,0 +1,13 @@
+# Terraform state files
+infrastructures/*.tfstate
+infrastructures/*.tfstate.*
+infrastructures/.terraform/
+
+# Lambda function ZIP files
+src/*.zip
+
+# LocalStack data
+data/
+
+# Miscellaneous
+.DS_Store
