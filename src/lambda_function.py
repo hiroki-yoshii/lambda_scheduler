@@ -1,7 +1,8 @@
+import os
 import json
+from datetime import datetime
 import requests
 import boto3
-from datetime import datetime
 
 def lambda_handler(event, context):
     # APIリクエスト
@@ -10,8 +11,8 @@ def lambda_handler(event, context):
 
     # S3への保存
     s3 = boto3.client('s3')
-    bucket_name = "original-data"
-    file_name = datetime.now().strftime("%Y%m%d") + ".json"
+    bucket_name = os.environ['BUCKET_NAME']
+    file_name = datetime.now().strftime("%Y%m%d%H%M%S") + ".json"
     s3.put_object(Bucket=bucket_name, Key=file_name, Body=json.dumps(data))
 
     return {

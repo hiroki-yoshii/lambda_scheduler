@@ -6,6 +6,12 @@ resource "aws_lambda_function" "fetchAPI_Lambda" {
   runtime = "python3.11"
   handler = "lambda_function.lambda_handler"
   role = aws_iam_role.fetchAPI_Lambda_exec_role.arn
+  # Lambda環境変数
+  environment {
+    variables = {
+      BUCKET_NAME = aws_s3_bucket.original_data_bucket.bucket
+    }
+  }
 }
 
 # Lambda実行ロール
