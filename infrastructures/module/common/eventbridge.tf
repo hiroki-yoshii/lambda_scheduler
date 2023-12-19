@@ -1,6 +1,6 @@
 # EventBridgeルール
 resource "aws_cloudwatch_event_rule" "fetchAPI_Lambda_schedule_rule" {
-  name                = "fetchAPI_Lambda-schedule-rule"
+  name                = "${var.environment}-fetchAPI_Lambda-schedule-rule"
   description         = "Trigger Fetch API on a schedule"
   schedule_expression = "cron(0/5 * * * ? *)" # Cron式 5分間隔
 }
