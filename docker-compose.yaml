@@ -3,7 +3,8 @@ services:
   # AWSをエミュレータするLocalStack用のコンテナ
   localstack:
     container_name: "localstack"
-    image: localstack/localstack:3
+    build:
+      context: ./docker/localstack # Dockerfile パス
     ports:
       - "4566:4566"
     environment:
@@ -11,9 +12,7 @@ services:
       - DEBUG=1 # デバッグ設定
       - LAMBDA_EXECUTOR=docker # コンテナ内でLambdaを動かす
       - DOCKER_HOST=unix:///var/run/docker.sock # Dockerソケット読み込み
-      - DATA_DIR=/var/lib/localstack/data # データマウント設定
     volumes:
-      - "/data:/var/lib/localstack/data"  # ホストのdataディレクトリからコンテナ内にマウント
       - "/var/run/docker.sock:/var/run/docker.sock" #ホストのDockerソケットマウント
     # 使用するDockerネットワーク
     networks:
@@ -24,14 +23,13 @@ services:
     build:
       context: ./docker/terraform # Dockerfile パス
     volumes:
-      - ./infrastructures:/app # Terraformコードをボリュームとして設定
+      - ./infrastructures/local:/app/local # ローカル用のTerraform設定ファイルをボリュームとして設定
+      - ./infrastructures/module:/app/module # # 共通のTerraformコードをボリュームとして設定
       - ./src:/src # アプリケーションコードをボリュームとして設定
     # Pythonプロジェクトビルド＆Terraform実行
     entrypoint: /bin/sh -c "pip install -r /src/requirements.txt -t /src/package &&
-      cp /src/lambda_function.py /src/package/ &&
-      cd /src/package &&
-      zip -r /src/lambda_function.zip . &&
-      cd /app &&
+      cp /src/lambda_function.py /src/package/ && cd /src/package && zip -r /src/lambda_function.zip . &&
+      cd /app/local && 
       terraform init &&
       terraform plan &&
       terraform apply -auto-approve"

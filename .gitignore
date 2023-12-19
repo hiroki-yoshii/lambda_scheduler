@@ -1,14 +1,17 @@
 # Terraformの状態を管理するファイルはGitで管理しない
-infrastructures/*.tfstate
-infrastructures/*.tfstate.*
+infrastructures/**/*.tfstate*
+infrastructures/**/*.tfstate*.*
+
 # Terraformバイナリ
-infrastructures/.terraform/
+**/.terraform/*
+
+# stateファイル
+infrastructures/**/*.tfstate*
+
 
 # プロジェクトビルド時に作成されるファイル
 src/*.zip
 src/package
-# LocalStackデータ
-data/
 
 # Mac用
 .DS_Store
