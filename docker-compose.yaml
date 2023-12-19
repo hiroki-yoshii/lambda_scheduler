@@ -25,10 +25,10 @@ services:
     volumes:
       - ./infrastructures/local:/app/local # ローカル用のTerraform設定ファイルをボリュームとして設定
       - ./infrastructures/module:/app/module # # 共通のTerraformコードをボリュームとして設定
-      - ./src:/src # アプリケーションコードをボリュームとして設定
+      - ./src:/app/src # アプリケーションコードをボリュームとして設定
     # Pythonプロジェクトビルド＆Terraform実行
-    entrypoint: /bin/sh -c "pip install -r /src/requirements.txt -t /src/package &&
-      cp /src/lambda_function.py /src/package/ && cd /src/package && zip -r /src/lambda_function.zip . &&
+    entrypoint: /bin/sh -c "pip install -r /app/src/requirements.txt -t /app/src/package &&
+      cp /app/src/lambda_function.py /app/src/package/ && cd /app/src/package && zip -r /app/src/lambda_function.zip . &&
       cd /app/local && 
       terraform init &&
       terraform plan &&
