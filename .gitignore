@@ -5,10 +5,6 @@ infrastructures/**/*.tfstate*.*
 # Terraformバイナリ
 **/.terraform/*
 
-# stateファイル
-infrastructures/**/*.tfstate*
-
-
 # プロジェクトビルド時に作成されるファイル
 src/*.zip
 src/package
