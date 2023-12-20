@@ -30,7 +30,7 @@ jobs:
       run:  | 
         pip install -r /src/requirements.txt -t /src/package &&
         cp /src/lambda_function.py /src/package/ && cd /src/package && zip -r /src/lambda_function.zip .
-        mv /src/lambda_function.zip ../infrastructures/
+        mv /src/lambda_function.zip ../../infrastructures/
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
