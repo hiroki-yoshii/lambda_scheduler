@@ -1,8 +1,8 @@
 # Lambda関数
 resource "aws_lambda_function" "fetchAPI_Lambda" {
   function_name = "${var.environment}-APIFetch_Lambda"
-  filename         = "/src/lambda_function.zip"
-  source_code_hash = filebase64sha256("/src/lambda_function.zip")
+  filename         = "../src/lambda_function.zip"
+  source_code_hash = filebase64sha256("../src/lambda_function.zip")
   runtime = "python3.11"
   handler = "lambda_function.lambda_handler"
   role = aws_iam_role.fetchAPI_Lambda_exec_role.arn
