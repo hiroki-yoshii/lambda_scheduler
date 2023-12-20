@@ -40,12 +40,12 @@ jobs:
         -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" \
         -backend-config="key=terraform.tfstate" \
         -backend-config="region=${{ secrets.TERRAFORM_BACKEND_REGION }}"
-      working-directory: /infrastructures/dev
+      working-directory: ./infrastructures/dev
       
     - name: Terraform Plan
       run: terraform plan
-      working-directory: /infrastructures/dev
+      working-directory: ./infrastructures/dev
 
     - name: Terraform Apply
       run: terraform apply -auto-approve
-      working-directory: /infrastructures/dev
+      working-directory: ./infrastructures/dev
