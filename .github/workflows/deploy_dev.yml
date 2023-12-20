@@ -29,9 +29,8 @@ jobs:
     - name: Install dependencies
       run:  | 
         pip install -r ./src/requirements.txt -t ./src/package &&
-        cp ./src/lambda_function.py ./src/package/ && cd ./src/package && zip -r ./src/lambda_function.zip .
-        cd ../
-        mv lambda_function.zip ../infrastructures/
+        cp ./src/lambda_function.py ./src/package/ && cd ./src/package && zip -r lambda_function.zip .
+        mv lambda_function.zip ../../infrastructures/
 
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
