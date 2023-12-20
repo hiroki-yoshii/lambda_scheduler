@@ -28,18 +28,19 @@ jobs:
 
     - name: Install dependencies
       run:  | 
-        ls -la && pwd
-        pip install -r /src/requirements.txt -t /src/package &&
-        cp /src/lambda_function.py /src/package/ && cd /src/package && zip -r /src/lambda_function.zip .
-        cd ../
-        mv lambda_function.zip ../infrastructures/
-
+        pip install -r ./src/requirements.txt -t ./src/package &&
+        cp ./src/lambda_function.py ./src/package/ && 
+        cd ./src/package && mkdir ../../infrastructures/src/ && zip -r ../../infrastructures/src/lambda_function.zip .
+      
     - name: Set up Terraform
       uses: hashicorp/setup-terraform@v1
 
     - name: Terraform Init
       run: |
-        terraform init
+        terraform init \
+        -backend-config="bucket=${{ secrets.TERRAFORM_BACKEND_BUCKET }}" \
+        -backend-config="key=terraform.tfstate" \
+        -backend-config="region=${{ secrets.TERRAFORM_BACKEND_REGION }}"
       working-directory: ./infrastructures/dev
       
     - name: Terraform Plan
