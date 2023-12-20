@@ -42,3 +42,21 @@ aws --endpoint-url=http://localhost:4566 s3 ls s3://local-original-data/
 ```
  aws --endpoint-url=http://localhost:4566 --region us-east-1 lambda invoke --function-name "local-APIFetch_Lambda" --no-cli-pager /dev/stdout
 ```
+
+## デプロイを構成する
+
+1. Environments作成
+    
+   https://github.com/hiroki-yoshii/lambda_scheduler/settings/environments
+   - develop // 開発環境
+   - stage   // ステージング環境
+   - prod    // 本番環境
+  
+2. 作成したEnvironmentsにシークレットを追加する
+   - AWS_ACCESS_KEY_ID      //アクセスキー
+   - AWS_SECRET_ACCESS_KEY　//シークレットキー
+   - AWS_REGION             //デプロイするリージョン
+   - TERRAFORM_BACKEND_BUCKET //tfstate管理用バケット(作成が必要)
+   - TERRAFORM_BACKEND_REGION //tfstate管理用バケットが存在するリージョン
+
+3. develop/stage/prodブランチにpushする
