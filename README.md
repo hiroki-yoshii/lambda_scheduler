@@ -47,7 +47,7 @@ aws --endpoint-url=http://localhost:4566 s3 ls s3://local-original-data/
 
 ## デプロイメントを構成する
 
-1. Environments作成
+1. **Environments作成**
 
    https://github.com/hiroki-yoshii/lambda_scheduler/settings/environments
 
@@ -57,7 +57,7 @@ aws --endpoint-url=http://localhost:4566 s3 ls s3://local-original-data/
    - stage   // ステージング環境
    - prod    // 本番環境
   
-3. 作成したEnvironmentsにシークレットを追加する
+3. **作成したEnvironmentsにシークレットを追加する**
 
    ![スクリーンショット 2023-12-21 015728](https://github.com/hiroki-yoshii/lambda_scheduler/assets/92834078/9c5188d7-66f3-4bb2-bdff-4daa9b12bceb)
 
@@ -67,4 +67,4 @@ aws --endpoint-url=http://localhost:4566 s3 ls s3://local-original-data/
    - TERRAFORM_BACKEND_BUCKET //tfstate管理用バケット(作成が必要)
    - TERRAFORM_BACKEND_REGION //tfstate管理用バケットが存在するリージョン
 
-5. develop/stage/prodブランチにpushする
+5. **develop/stage/prodブランチにpushする**
