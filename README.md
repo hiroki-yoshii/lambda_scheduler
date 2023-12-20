@@ -5,9 +5,7 @@ AWSでのバッチ処理を想定した開発のテンプレート
 
 EventBridge+Lambdaを使用し、外部APIのレスポンス結果をS3に保存します。
 
-[
-![スクリーンショット 2023-12-21 012812](https://github.com/hiroki-yoshii/lambda_scheduler/assets/92834078/14cd75ff-4b87-495f-9246-b8e2e782a834)
-](url)
+![スクリーンショット 2023-12-21 012933](https://github.com/hiroki-yoshii/lambda_scheduler/assets/92834078/d3d1b753-4b62-4fa5-88f0-cade0ba07bb5)
 
 ## 使用技術
 - **言語**: 
